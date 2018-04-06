@@ -1,2 +1,2 @@
 # craftdemo-data
-Craft Demo for Data operatins
+Craft Demo for Data operations
