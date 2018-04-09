@@ -18,5 +18,5 @@ phases:
 artifacts:
   type: zip
   files:
-    - 'dist/'
+    - './dist/*.zip'
   discard-paths: no
