@@ -6,10 +6,11 @@ phases:
       - apt-get update -y
       - apt-get install -y wget
       - pip install --upgrade pip
+      - pip install -r requirements.txt
+      - pip install --upgrade awscli
   build:
     commands:
-      - make sdist
-      - zip application.zip *
+      - make dist
   post_build:
     commands:
       - echo No post build yet
@@ -17,5 +18,5 @@ phases:
 artifacts:
   type: zip
   files:
-    - '**/*'
+    - 'dist/'
   discard-paths: no
