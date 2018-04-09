@@ -1,0 +1,2 @@
+recursive-include indecision/templates *
+recursive-include indecision/static *
