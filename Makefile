@@ -4,7 +4,7 @@ clean:
 	rm -rf venv && rm -rf *.egg-info && rm -rf dist && rm -rf *.log*
 
 venv:
-	virtualenv --python=python3 venv && venv/bin/python setup.py develop
+	virtualenv --python=python2 venv && venv/bin/python setup.py develop
 
 run: venv
 	FLASK_APP=indecision INDECISION_SETTINGS=../settings.cfg venv/bin/flask run

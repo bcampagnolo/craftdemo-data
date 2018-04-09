@@ -1,0 +1,21 @@
+version: 0.2
+            
+phases:
+  install:
+    commands:
+      - apt-get update -y
+      - apt-get install -y wget
+      - pip install --upgrade pip
+  build:
+    commands:
+      - make sdist
+      - zip application.zip *
+  post_build:
+    commands:
+      - echo No post build yet
+      
+artifacts:
+  type: zip
+  files:
+    - '**/*'
+  discard-paths: no
