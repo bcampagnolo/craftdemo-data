@@ -3,4 +3,5 @@ venv/
 *.egg-info/
 dist/
 settings.cfg
+.vscode/*
 *.log*
