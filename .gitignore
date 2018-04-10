@@ -5,3 +5,4 @@ dist/
 settings.cfg
 .vscode/*
 *.log*
+_pycache_
