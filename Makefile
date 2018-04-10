@@ -12,8 +12,8 @@ run: venv
 test: venv
 	INDECISION_SETTINGS=../settings.cfg venv/bin/python -m unittest discover -s tests
 
-devdist: venv test
+sdist: venv req
 	venv/bin/python setup.py sdist
 
-dist: venv
-	venv/bin/python setup.py sdist --formats=zip
+req:
+	venv/bin/python -m pip install -r requirements.txt

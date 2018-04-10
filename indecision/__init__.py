@@ -1,9 +1,13 @@
 import os
 from flask import Flask
+from ddtrace import tracer
+from ddtrace.contrib.flask import TraceMiddleware
 
 app = Flask(__name__)
 app.config.from_object('indecision.default_settings')
 app.config.from_envvar('INDECISION_SETTINGS')
+
+traced_app = TraceMiddleware(app, tracer, service="indecision", distributed_tracing=False)
 
 if not app.debug:
     import logging
