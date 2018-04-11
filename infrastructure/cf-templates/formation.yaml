@@ -4,32 +4,32 @@ Description: craft-data-services
 #Parameters:
 
 Resources:
-ScaleUpPolicy:
-  Type: AWS::AutoScaling::ScalingPolicy
-  Properties:
-    AdjustmentType: ChangeInCapacity
-    AutoScalingGroupName:
-      !Ref: AutoScalingGroup
-    Cooldown: '300'
-    ScalingAdjustment: '1'
-    
-CPUAlarmHigh:
-  Type: AWS::CloudWatch::Alarm
-  Properties:
-    EvaluationPeriods: '1'
-    Statistic: Average
-    Threshold: '10'
-    AlarmDescription: Alarm if CPU too high or metric disappears indicating instance is down
-    Period: '60'
-    AlarmActions:
-    - !Ref: ScaleUpPolicy
-    Namespace: AWS/EC2
-    Dimensions:
-    - Name: AutoScalingGroupName
-      Value:
+  ScaleUpPolicy:
+    Type: AWS::AutoScaling::ScalingPolicy
+    Properties:
+      AdjustmentType: ChangeInCapacity
+      AutoScalingGroupName:
         !Ref: AutoScalingGroup
-    ComparisonOperator: GreaterThanThreshold
-    MetricName: CPUUtilization
+      Cooldown: '300'
+      ScalingAdjustment: '1'
+      
+  CPUAlarmHigh:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      EvaluationPeriods: '1'
+      Statistic: Average
+      Threshold: '10'
+      AlarmDescription: Alarm if CPU too high or metric disappears indicating instance is down
+      Period: '60'
+      AlarmActions:
+      - !Ref: ScaleUpPolicy
+      Namespace: AWS/EC2
+      Dimensions:
+      - Name: AutoScalingGroupName
+        Value:
+          !Ref: AutoScalingGroup
+      ComparisonOperator: GreaterThanThreshold
+      MetricName: CPUUtilization
 
   AutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
