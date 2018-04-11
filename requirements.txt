@@ -7,6 +7,7 @@ backpack==0.1
 blinker==1.4
 cleo==0.6.5
 click==6.7
+ddtrace==0.11.1
 Faker==0.7.18
 Flask==0.12.2
 inflection==0.3.1
