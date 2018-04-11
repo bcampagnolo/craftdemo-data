@@ -10,7 +10,7 @@ phases:
       - pip install --upgrade awscli
   build:
     commands:
-      - make dist
+      - make sdist
   post_build:
     commands:
       - echo No post build yet
