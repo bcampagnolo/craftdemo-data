@@ -4,12 +4,39 @@ Description: craft-data-services
 #Parameters:
 
 Resources:
+ScaleUpPolicy:
+  Type: AWS::AutoScaling::ScalingPolicy
+  Properties:
+    AdjustmentType: ChangeInCapacity
+    AutoScalingGroupName:
+      !Ref: AutoScalingGroup
+    Cooldown: '300'
+    ScalingAdjustment: '1'
+    
+CPUAlarmHigh:
+  Type: AWS::CloudWatch::Alarm
+  Properties:
+    EvaluationPeriods: '1'
+    Statistic: Average
+    Threshold: '10'
+    AlarmDescription: Alarm if CPU too high or metric disappears indicating instance is down
+    Period: '60'
+    AlarmActions:
+    - !Ref: ScaleUpPolicy
+    Namespace: AWS/EC2
+    Dimensions:
+    - Name: AutoScalingGroupName
+      Value:
+        !Ref: AutoScalingGroup
+    ComparisonOperator: GreaterThanThreshold
+    MetricName: CPUUtilization
+
   AutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     CreationPolicy:
       ResourceSignal:
         Count: 1
-        Timeout: PT1200S
+        Timeout: PT600S
 
     Properties:
       LaunchConfigurationName: !Ref InstanceLaunchConfig
@@ -21,8 +48,8 @@ Resources:
         - "subnet-1f9e2366" 
         - "subnet-baea78e0"
         - "subnet-d664b89d"
-      MaxSize: 1
-      MinSize: 1
+      MaxSize: 12
+      MinSize: 3
       HealthCheckType: ELB
       HealthCheckGracePeriod: 720
       TerminationPolicies:
@@ -46,7 +73,7 @@ Resources:
         Fn::ImportValue:
           !Sub vpc-bc481fc5:craft-data-services-app-InstanceRoleProfile:name
       KeyName: flask-key-west2
-      ImageId: ami-b24222ca
+      ImageId: ami-7dd1b105
       InstanceType: t2.micro
       SecurityGroups:
         - Fn::ImportValue:
