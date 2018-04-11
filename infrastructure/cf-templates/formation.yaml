@@ -73,7 +73,7 @@ Resources:
             ###### Download chef out of s3 ######s
             # 496911069803-us-west-2-artifacts/chef/cookbooks.zip
             aws s3 cp s3://496911069803-us-west-2-artifacts/chef/cookbooks.zip ${AWS::StackName}-chef.zip
-            aws s3 cp s3://496911069803-us-west-2-artifacts/data-service/craftdemo-data/dist/indecision-1.6.zip ${AWS::StackName}-flask.zip
+            aws s3 cp s3://496911069803-us-west-2-artifacts/data-service/craftdemo-data/dist/indecision-1.7.zip ${AWS::StackName}-flask.zip
           
             if [ $? -ne 0 ]; then
               # Unrecoverable error, so fail fast
