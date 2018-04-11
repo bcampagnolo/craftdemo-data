@@ -49,7 +49,7 @@ def instance_region():
 
 
 def nginx_version():
-    return '1.2.3'
+    return 'nginx version: nginx/1.12.2'
 
 
 def instance_count():
